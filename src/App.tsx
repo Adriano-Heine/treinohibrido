@@ -15,11 +15,15 @@ function normalizeText(value: string): string {
     .trim();
 }
 
+const STUDIO_LOGO_URL =
+  'https://res.cloudinary.com/dfbsag282/image/upload/v1795539350/studio_c11fyr.png';
+
 export default function App() {
   const [viewedIds, setViewedIds] = useState<Set<string>>(() => new Set());
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeExerciseId, setActiveExerciseId] = useState<string | null>(null);
+  const [logoError, setLogoError] = useState(false);
 
   // Pré-carrega e decodifica as imagens em segundo plano para navegação instantânea
   useEffect(() => {
@@ -73,8 +77,52 @@ export default function App() {
       <Header onOpenAbout={() => setIsAboutOpen(true)} />
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 lg:px-8 pt-6 sm:pt-9 pb-14">
-        {/* Apresentação concisa */}
-        <section className="max-w-2xl">
+        {/* Logo centralizada no topo + apresentação concisa */}
+        <section className="mx-auto flex max-w-2xl flex-col items-center text-center">
+          {!logoError && (
+            <div className="relative mb-5 sm:mb-6 inline-flex items-center justify-center">
+              {/* Halo suave de luz âmbar atrás da logo */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-4 inset-y-2 rounded-full bg-amber-400/20 blur-2xl"
+              />
+
+              {/* Imagem da logo com brilho sutil + feixe de luz mascarado na silhueta */}
+              <div className="relative inline-block">
+                <img
+                  src={STUDIO_LOGO_URL}
+                  alt="Logo do Studio"
+                  referrerPolicy="no-referrer"
+                  onError={() => setLogoError(true)}
+                  className="relative h-32 sm:h-40 md:h-44 w-auto max-w-[85vw] sm:max-w-[440px] md:max-w-[500px] object-contain drop-shadow-[0_0_20px_rgba(255,185,0,0.22)]"
+                />
+
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 overflow-hidden"
+                  style={{
+                    WebkitMaskImage: `url(${STUDIO_LOGO_URL})`,
+                    maskImage: `url(${STUDIO_LOGO_URL})`,
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                  }}
+                >
+                  <div
+                    className="animate-logo-shine h-full w-full"
+                    style={{
+                      background:
+                        'linear-gradient(112deg, transparent 34%, rgba(255, 250, 230, 0.58) 49%, rgba(255, 185, 0, 0.32) 54%, transparent 68%)',
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
           <p className="text-lg sm:text-2xl font-semibold leading-snug text-[#F8FAFC] text-balance">
             Conheça os exercícios. Entenda os nomes.{' '}
             <span className="text-amber-400">Chegue preparado.</span>
