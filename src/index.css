@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #0B101B;
+    color: #F8FAFC;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: #0B101B;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30, 48, 84, 0.42), transparent 70%),
+      radial-gradient(ellipse 45% 35% at 85% 15%, rgba(245, 158, 11, 0.06), transparent 65%);
+    background-attachment: fixed;
+  }
+}

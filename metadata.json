@@ -1,0 +1,6 @@
+{
+  "name": "HYROX Visual Guide",
+  "description": "Guia visual interativo para ajudar iniciantes a reconhecer e associar os nomes em inglês aos oito exercícios oficiais da HYROX.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
