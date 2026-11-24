@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Search, SearchX, X } from 'lucide-react';
 import { AboutModal } from './components/AboutModal';
 import { ExerciseGlossaryList } from './components/ExerciseGlossaryList';
@@ -20,6 +20,23 @@ export default function App() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeExerciseId, setActiveExerciseId] = useState<string | null>(null);
+
+  // Pré-carrega e decodifica as imagens em segundo plano para navegação instantânea
+  useEffect(() => {
+    const preloadedImages = EXERCISES.map((exercise) => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = exercise.imageSrc;
+      if (typeof img.decode === 'function') {
+        img.decode().catch(() => {});
+      }
+      return img;
+    });
+
+    return () => {
+      preloadedImages.length = 0;
+    };
+  }, []);
 
   const totalCount = EXERCISES.length;
   const hasAnyInteraction = viewedIds.size > 0;

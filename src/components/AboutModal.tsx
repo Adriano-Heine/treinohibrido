@@ -34,7 +34,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/75 p-0 sm:p-6 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#050811]/88 p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="about-modal-title"
@@ -44,9 +44,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
         }
       }}
     >
-      <div className="w-full sm:max-w-lg rounded-t-3xl sm:rounded-2xl border border-white/[0.1] bg-[#131A29] p-6 sm:p-7 shadow-2xl">
-        <div className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-white/15 sm:hidden" aria-hidden="true" />
-
+      <div className="animate-modal-reveal w-full max-w-lg rounded-2xl border border-white/[0.12] bg-[#131A29] p-6 sm:p-7 shadow-2xl max-h-[90dvh] overflow-y-auto">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-medium text-amber-400">
